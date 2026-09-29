@@ -34,8 +34,14 @@ export const AlertStream: React.FC<AlertStreamProps> = ({
   useEffect(() => {
     let ws: WebSocket | null = null;
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.hostname || 'localhost';
-    const wsUrl = `${protocol}//${host}:8005/ws/threats`;
+    let wsUrl = '';
+    if (import.meta.env.VITE_WS_URL) {
+      wsUrl = import.meta.env.VITE_WS_URL;
+    } else if (window.location.port === '5173' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      wsUrl = `${protocol}//${window.location.hostname}:8005/ws/threats`;
+    } else {
+      wsUrl = `${protocol}//${window.location.host}/ws/threats`;
+    }
 
     try {
       ws = new WebSocket(wsUrl);

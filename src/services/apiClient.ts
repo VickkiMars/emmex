@@ -29,7 +29,28 @@ export interface SystemHealth {
   [key: string]: any;
 }
 
-export const API_BASE_URL = 'http://localhost:8005';
+// Resolve API Base URL from Vercel Service Bindings (BACKEND_URL), Vite environment, or relative path
+export const getApiBaseUrl = (): string => {
+  // 1. Vercel internal service binding (injected into Node/Serverless environment as BACKEND_URL)
+  const nodeProcess = typeof globalThis !== 'undefined' ? (globalThis as any).process : undefined;
+  if (nodeProcess?.env?.BACKEND_URL) {
+    return String(nodeProcess.env.BACKEND_URL).replace(/\/$/, '');
+  }
+  // 2. Vite environment variable (custom override)
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/$/, '');
+  }
+  // 3. Browser environment on Vercel or production: relative path uses top-level rewrites (/api/* -> backend)
+  if (typeof window !== 'undefined') {
+    if (window.location.port === '5173' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      return 'http://localhost:8005';
+    }
+    return '';
+  }
+  return '';
+};
+
+export const API_BASE_URL = getApiBaseUrl();
 
 export interface PythonSystemStatus {
   status: 'ONLINE' | 'OFFLINE';
