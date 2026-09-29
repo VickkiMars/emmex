@@ -1,0 +1,17 @@
+node_modules
+dist
+.git
+.github
+.agents
+backend
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+coverage
+.pytest_cache
+*.png
+*.docx
+walkthrough.md
+.oxlintrc.json

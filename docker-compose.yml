@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: emmanuel-backend:latest
+    container_name: emmanuel-backend
+    restart: unless-stopped
+    ports:
+      - "${EMMANUEL_BACKEND_PORT:-8005}:8005"
+    environment:
+      - EMMANUEL_BACKEND_HOST=0.0.0.0
+      - EMMANUEL_BACKEND_PORT=8005
+      - EMMANUEL_DEBUG=${EMMANUEL_DEBUG:-False}
+      - DATABASE_URL=${DATABASE_URL:-sqlite:////app/data/emmanuel.db}
+    volumes:
+      # Persistent storage for SQLite database & HHS datasets
+      - ./backend/data:/app/data
+      # Persistent storage for trained Scikit-Learn and ONNX model artifacts
+      - ./backend/saved_models:/app/saved_models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/api/system/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - emmanuel-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: emmanuel-frontend:latest
+    container_name: emmanuel-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-5174}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - emmanuel-network
+
+networks:
+  emmanuel-network:
+    name: emmanuel-network
+    driver: bridge

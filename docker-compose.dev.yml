@@ -1,0 +1,49 @@
+version: '3.8'
+
+# =============================================================================
+# Development Docker Compose with Hot Module Replacement & FastAPI Auto-Reload
+# Usage: docker-compose -f docker-compose.dev.yml up
+# =============================================================================
+
+services:
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: emmanuel-backend-dev
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8005 --reload
+    ports:
+      - "8005:8005"
+    environment:
+      - EMMANUEL_BACKEND_HOST=0.0.0.0
+      - EMMANUEL_BACKEND_PORT=8005
+      - EMMANUEL_DEBUG=True
+      - DATABASE_URL=sqlite:////app/data/emmanuel.db
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/data:/app/data
+      - ./backend/saved_models:/app/saved_models
+    networks:
+      - emmanuel-dev-network
+
+  frontend-dev:
+    image: node:20-alpine
+    container_name: emmanuel-frontend-dev
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8005
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - backend-dev
+    networks:
+      - emmanuel-dev-network
+
+networks:
+  emmanuel-dev-network:
+    name: emmanuel-dev-network
+    driver: bridge

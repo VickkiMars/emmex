@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "url": "user_uploaded_image",
+    "extractedAt": "2026-09-18T19:35:00Z",
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "userAgent": "macOS Sonoma / Safari 17"
+  },
+  "designSystem": {
+    "colors": {
+      "primaries": [
+        { "name": "Slate Main Header", "value": "#0f172a", "usage": ["Headings", "Active Nav Icons", "Primary Buttons"] },
+        { "name": "Slate Body Text", "value": "#334155", "usage": ["Body Text", "Labels"] }
+      ],
+      "neutrals": [
+        { "name": "Pure White", "value": "#ffffff", "usage": ["Card Containers", "Sidebar Background", "Modal Surfaces"] },
+        { "name": "Off-White Surface", "value": "#f8fafc", "usage": ["App Canvas Background", "Secondary Sections"] },
+        { "name": "Pill Gray Highlight", "value": "#f1f5f9", "usage": ["Active Nav Item Background", "Hover States", "Badge Backgrounds"] },
+        { "name": "Border Subtle Gray", "value": "#e2e8f0", "usage": ["Card Borders", "Table Dividers", "Input Outlines"] }
+      ],
+      "accents": [
+        { "name": "Mac Red Control Dot", "value": "#ff5f56", "usage": ["Window Header Close Button"] },
+        { "name": "Mac Yellow Control Dot", "value": "#ffbd2e", "usage": ["Window Header Minimize Button"] },
+        { "name": "Mac Green Control Dot", "value": "#27c93f", "usage": ["Window Header Expand Button"] },
+        { "name": "Emerald Positive Badge", "value": "#10b981", "usage": ["Growth Indicators", "Low Threat Severity", "Compliant Status"] },
+        { "name": "Vibrant Orange Bar", "value": "#f97316", "usage": ["Medium Threat Severity", "Active Signal Bars"] },
+        { "name": "Cyan Blue Accent", "value": "#0284c7", "usage": ["Interactive Buttons", "Active Tabs"] }
+      ],
+      "semantic": {
+        "success": "#10b981",
+        "error": "#ef4444",
+        "warning": "#f59e0b",
+        "info": "#0284c7"
+      },
+      "gradients": [
+        { "name": "Desktop Wall Gradient", "value": "linear-gradient(to bottom right, #f1f5f9, #e2e8f0, #dbeafe)", "usage": "App Ambient Background" }
+      ],
+      "backgrounds": [
+        { "element": "app", "value": "#f8fafc" },
+        { "element": "sidebar", "value": "#ffffff" },
+        { "element": "cards", "value": "#ffffff" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        { "name": "Inter / SF Pro Display", "faces": ["-apple-system", "BlinkMacSystemFont", "SF Pro Text", "Inter", "sans-serif"], "source": "system" }
+      ],
+      "fontSizes": {
+        "min": "0.75rem",
+        "max": "2.25rem",
+        "scale": [
+          { "name": "xs", "size": "0.75rem", "lineHeight": 1.25, "letterSpacing": "0em", "fontWeight": 500 },
+          { "name": "sm", "size": "0.875rem", "lineHeight": 1.4, "letterSpacing": "0em", "fontWeight": 500 },
+          { "name": "base", "size": "1rem", "lineHeight": 1.5, "letterSpacing": "-0.01em", "fontWeight": 600 },
+          { "name": "xl", "size": "1.25rem", "lineHeight": 1.3, "letterSpacing": "-0.02em", "fontWeight": 700 },
+          { "name": "2xl", "size": "1.75rem", "lineHeight": 1.2, "letterSpacing": "-0.03em", "fontWeight": 800 }
+        ]
+      },
+      "headings": {
+        "h1": { "size": "1.75rem", "weight": 800, "lineHeight": 1.2, "letterSpacing": "-0.03em", "marginBottom": "0.5rem" },
+        "h2": { "size": "1.25rem", "weight": 700, "lineHeight": 1.3, "letterSpacing": "-0.02em", "marginBottom": "0.375rem" }
+      },
+      "body": {
+        "size": "0.875rem",
+        "weight": 400,
+        "lineHeight": 1.5,
+        "color": "#334155"
+      }
+    },
+    "spacing": {
+      "baseUnit": "0.25rem",
+      "containerPadding": { "mobile": "1rem", "tablet": "1.5rem", "desktop": "2rem" }
+    },
+    "borders": {
+      "radius": {
+        "none": "0px",
+        "sm": "0.375rem",
+        "md": "0.5rem",
+        "lg": "0.75rem",
+        "xl": "1rem",
+        "2xl": "1.5rem",
+        "full": "9999px"
+      },
+      "widths": { "thin": "1px" },
+      "styles": ["solid"]
+    },
+    "shadows": {
+      "card": { "value": "0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03)", "usage": ["Cards", "Panels"] },
+      "window": { "value": "0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.06)", "usage": ["App Window Container"] }
+    },
+    "interactions": {
+      "hover": { "scale": 1.01, "opacity": 0.95, "transition": "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)" },
+      "activePill": { "background": "#f1f5f9", "color": "#0f172a", "borderRadius": "0.5rem" }
+    }
+  },
+  "patterns": {
+    "macControls": {
+      "dots": ["#ff5f56", "#ffbd2e", "#27c93f"],
+      "size": "12px"
+    },
+    "navigation": {
+      "type": "side",
+      "activeStyle": "rounded-pill-gray"
+    }
+  }
+}
